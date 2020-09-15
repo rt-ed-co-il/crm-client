@@ -1,0 +1,20 @@
+.card-body {font-size: 14px;}
+
+.flow { 
+    cursor: pointer;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-radius: 0;
+}
+.new_entrie {
+    border-left-color: AQUA;
+}
+.task {
+    border-left-color: FUCHSIA;
+}
+.meeting {
+    border-left-color: PURPLE,
+}
+.other {
+    border-left-color: NAVY;
+}

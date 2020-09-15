@@ -1,0 +1,57 @@
+<mdb-card>
+  <mdb-card-body>
+    <div *ngIf="!branch" [ngStyle]="{ 'text-align':'right' }">
+      <find-cmp></find-cmp>
+    </div>
+    <div class="table-responsive">
+      <table datatable class="table table-hover">
+        <thead class="header-dark"> 
+          <tr>
+            <th scope="col">t</th>
+            <th scope="col">s</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date</th>
+            <th scope="col">Src</th>
+            <th scope="col">Det</th>
+            <th scope="col">Br</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let individual of lastEntries" [ngStyle]="{ 'cursor':'pointer'}" (click)="editIndividual(individual)">
+            <td>
+              <action-type [actionType]="individual.last_action_type"></action-type>
+            </td>
+            <td>
+              <action-status [actionStatus]="individual.last_action_status"></action-status>
+            </td>
+            <td [ngStyle]="{'color':individual.cv_text ? '#428bca' : '#000000' }">
+              {{ individual.first_name }} {{ individual.last_name }}
+            </td>
+            <td>{{ individual.phone_1 }}</td>
+            <td>{{ individual.email }}</td>
+            <td>{{ individual.last_action_create_date | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ individual.source }}</td>
+            <td>{{ individual.source_details }}</td>
+            <td>
+              <div [ngSwitch]="individual.branch_id">
+                <div *ngSwitchCase="'100'">
+                  Rishon
+                </div>
+                <div *ngSwitchCase="'200'">
+                  Tel Aviv
+                </div>
+                <div *ngSwitchCase="'300'">
+                  Haifa
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mdb-card-body>
+</mdb-card>
+
+

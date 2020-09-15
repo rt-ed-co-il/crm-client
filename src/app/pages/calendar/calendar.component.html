@@ -1,0 +1,70 @@
+
+<div class="row justify-content-center">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row justify-content-center">
+        <div class="col-7">
+          <h5 class="text-gray-700">{{calMonth}}</h5>
+        </div>
+        <div class="col-1">
+          <a class="nav-link" (click)="prevMonth()">
+            <i class="nc-icon nc-minimal-left"></i>
+          </a>
+        </div>
+        <div class="col-1">
+          <a class="nav-link" (click)="currMonth()">
+            <i class="nc-icon nc-minimal-down"></i>
+          </a>
+        </div>
+        <div class="col-1">
+          <a class="nav-link" (click)="nextMonth()">
+            <i class="nc-icon nc-minimal-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body ">
+      <div class="row justify-content-center" >
+        <div class="col-12">
+          <table class="table table-striped">
+            <thead class="text-primary">
+              <tr *ngIf="mobile; else largeScreen">
+                <th scope="col-2">Sun</th>
+                <th scope="col-2">Mon</th>
+                <th scope="col-2">Tue</th>
+                <th scope="col-2">Wed</th>
+                <th scope="col-2">Thu</th>
+                <th scope="col-2">Fri</th>
+                <th scope="col-2">Sat</th>
+              </tr>
+              <ng-template #largeScreen> 
+                <tr>
+                  <th scope="col-2">Sunday</th>
+                  <th scope="col-2">Monday</th>
+                  <th scope="col-2">Tuesday</th>
+                  <th scope="col-2">Wednesday</th>
+                  <th scope="col-2">Thursday</th>
+                  <th scope="col-2">Friday</th>
+                  <th scope="col-2">Saturday</th>
+                </tr>
+              </ng-template>
+            </thead>
+            <tbody>
+              <tr *ngFor="let week of wk; index as i">
+                <td appCalStyle [thisMonthDay] = "week[0].thisMonthDay" [today] ="week[0].today"> {{week[0].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[1].thisMonthDay" [today] ="week[1].today"> {{week[1].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[2].thisMonthDay" [today] ="week[2].today"> {{week[2].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[3].thisMonthDay" [today] ="week[3].today"> {{week[3].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[4].thisMonthDay" [today] ="week[4].today"> {{week[4].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[5].thisMonthDay" [today] ="week[5].today"> {{week[5].day}}</td>
+                <td appCalStyle [thisMonthDay] = "week[6].thisMonthDay" [today] ="week[6].today"> {{week[6].day}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

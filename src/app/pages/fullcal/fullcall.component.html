@@ -1,0 +1,48 @@
+<div class='app'>
+  <div class='app-calendar' *ngIf="calendarVisible">
+    <full-calendar
+      #calendar
+      defaultView="dayGridMonth"
+      [header]="{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      }"
+      [plugins]="calendarPlugins"
+      [weekends]="calendarWeekends"
+      [events]="calendarEvents"
+      (dateClick)="handleDateClick($event)"
+      (eventClick)="eventClick($event)"
+    ></full-calendar>
+  </div>
+</div>
+
+<jw-modal id="custom-modal-1">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-1');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h6>Meeting</h6>
+  <p> 
+    {{entry.first_name}} {{entry.last_name}} <br />
+    {{entry.email}} {{entry.phone_1}} <br />
+    {{entry.source}} {{entry.source_details}} <br />
+    {{entry.last_action_message}}</p>
+  <form [formGroup]="individualForm" (ngSubmit)="onSubmit(individualForm.value)">
+    <textarea id="subject" dir="rtl" formControlName="subject" class="form-control text-right" placeholder="meeting result"></textarea> 
+    <select 
+      class="form-control"
+      formControlName=status 
+      (change)="ChangingValue($event)" 
+      [value]="entry.last_action_status"
+    >
+      <option *ngFor="let status of statuses">
+        {{status}}
+      </option>
+    </select>    
+    <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Update</button>
+    <button class="btn btn-outline-info btn-sm" (click)="editIndividual(entry);">Person Page</button>
+    <button class="btn btn-outline-danger btn-sm" (click)="closeModal('custom-modal-1');">Cancel</button>
+  </form>
+</jw-modal>
+
+

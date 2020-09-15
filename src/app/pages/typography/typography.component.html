@@ -1,0 +1,168 @@
+
+<div class="row">
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-6"  style="font-size: 15px;">
+        <action-type [actionType]="'LID'"></action-type>
+        New SEO,PPC,Facebook
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{newEntriesSCO.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-6"  style="font-size: 15px;">
+        <action-type [actionType]="'Task'"></action-type>
+        Tasks Before_meeinig
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{beforeMeeting.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <action-type [actionType]="'Appointment'"></action-type>
+        Meetings
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{meetingsEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <action-type [actionType]="'Task'"></action-type>
+        Tasks after_meetings
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{tipulEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <div class="mt-3">
+          <i [ngStyle]="{'color': 'blue'}" class="nc-icon nc-email-85"></i>
+          <i [ngStyle]="{'color': 'BLUE'}" class="nc-icon nc-chat-33"></i>
+          <i [ngStyle]="{'color': 'NAVY'}" class="nc-icon nc-alert-circle-i"></i>  
+        </div>
+        Error Comment,Email,SMS
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{infoEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="mt-3">
+      <i [ngStyle]="{'color': 'GREEN','cursor':'pointer','font-size': '25px'}" class="nc-icon nc-refresh-69" (click)="refresh()" ></i>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <div *ngFor="let enry of newEntriesSCO" 
+    class="card flow new_entrie" 
+    [ngStyle]="{'background-color': getColor(enry.status)}"
+    (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_create_date" class="fa fa-circle"></i>
+          {{enry.last_action_create_date | date: 'dd/MM/yy'}}
+        </p> 
+        {{enry.first_name}} {{enry.last_name}} {{enry.phone_1}} {{enry.source_details}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div *ngFor="let enry of beforeMeeting" 
+    class="card flow task" 
+    [ngStyle]="{'background-color': getColor(enry.status)}" 
+    (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_start_date" class="fa fa-circle"></i>
+          {{enry.last_action_start_date | date: 'dd/MM/yy HH:mm' }}
+        </p>
+        {{enry.first_name}} {{enry.last_name}} {{enry.phone_1}} {{enry.source_details}}
+      </div>
+    </div>
+
+  </div>  
+  <div class="col-md-2">
+    <div *ngFor="let enry of meetingsEntries" 
+    [ngStyle]="{'background-color': getColor(enry.status)}"
+     class="card flow meeting" 
+     (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_start_date" class="fa fa-circle"></i>
+          {{enry.last_action_start_date | date: 'dd/MM/yy HH:mm'}}
+        </p>
+        {{enry.first_name}} {{enry.last_name}} {{enry.phone_1}} {{enry.source_details}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div *ngFor="let enry of tipulEntries" 
+    class="card flow task" 
+    [ngStyle]="{'background-color': getColor(enry.status)}" 
+    (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_start_date" class="fa fa-circle"></i>
+          {{enry.last_action_start_date | date: 'dd/MM/yy HH:mm' }}
+        </p>
+        {{enry.first_name}} {{enry.last_name}} {{enry.phone_1}} {{enry.source_details}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div *ngFor="let enry of infoEntries"  
+    class="card flow other" 
+    [ngStyle]="{'background-color': getColor(enry.status)}" 
+     (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_create_date" class="fa fa-circle"></i>
+          {{enry.last_action_create_date | date: 'dd/MM/yy'}}
+        </p> 
+        {{enry.first_name}} {{enry.last_name}} {{enry.phone_1}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="mt-3">
+      <div 
+      [ngStyle]="{ 'text-align':'right' }">
+        <find-cmp> </find-cmp>
+        <div *ngIf="!sales">
+          <statistic-cmp></statistic-cmp>
+        </div>
+      </div>
+      <price-cmp> </price-cmp>
+    </div>
+  </div>
+</div>

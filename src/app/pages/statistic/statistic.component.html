@@ -1,0 +1,40 @@
+<mdb-card>
+  <mdb-card-body>
+    <h6>Statistic</h6>
+    <form [formGroup]="personForm" >
+  <label>Statistic Date</label>
+  <input
+  type="date"
+  id="statistic_date"
+  formControlName="statisticDate"
+  class="form-control form-control-sm"
+  mdbInput
+  />
+  <button class="btn btn-sm" (click)="showStatistic()">Show Statistic</button>
+</form>
+</mdb-card-body>
+</mdb-card>
+  
+<jw-modal id="custom-modal-22">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-22');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4>Statistic Date {{personForm.value.statisticDate | date : "dd-MM-yyyy"}}</h4>
+  <table class ="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let st of statistics"> 
+        <td>{{st.user}}</td>
+        <td>{{st.name}}</td>
+        <td>{{st.actions}}</td>
+      </tr>
+    </tbody>
+  </table>
+</jw-modal>
+

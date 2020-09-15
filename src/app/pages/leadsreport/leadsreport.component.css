@@ -1,0 +1,43 @@
+.card-body {font-size: 14px;}
+
+.stat_lead { 
+    border-left-width: 4px;
+    border-left-color: AQUA;
+    border-left-style: solid;
+    border-radius: 0;
+  }
+
+  .stat_app { 
+    border-left-width: 4px;
+    border-left-color: PURPLE;
+    border-left-style: solid;
+    border-radius: 0;
+  }
+
+  .stat_con { 
+    border-left-width: 4px;
+    border-left-color: TEAL;
+    border-left-style: solid;
+    border-radius: 0;
+  }
+
+  .stat_tas { 
+    border-left-width: 4px;
+    border-left-color: FUCHSIA;
+    border-left-style: solid;
+    border-radius: 0;
+  }
+
+  .stat_not { 
+    border-left-width: 4px;
+    border-left-color: RED;
+    border-left-style: solid;
+    border-radius: 0;
+  }
+  .clickable { 
+    cursor: pointer;
+  }
+  .clickable:hover { 
+    cursor: pointer;
+    background-color: aquamarine;
+  }

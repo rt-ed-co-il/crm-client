@@ -1,0 +1,15 @@
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="actionsForm" >
+      <label>Create Action</label>
+      <select class="form-control"
+      formControlName=action 
+      (change)="ChangingValue($event)">
+        <option>Choose Action</option>
+        <option *ngFor="let action of actions">
+          {{action}}
+        </option>
+      </select>
+    </form>
+  </mdb-card-body>
+</mdb-card>

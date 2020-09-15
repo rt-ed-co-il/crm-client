@@ -1,0 +1,408 @@
+<div *ngIf="statistic" class="row">
+  
+  <form [formGroup]="personForm" >
+
+    <span>Start Date </span>
+    <input
+    type="date"
+    id="tatisticStartDate"
+    formControlName="statisticStartDate"
+    />
+    <input
+    type="time"
+    id="statisticStartTime"
+    formControlName="statisticStartTime"
+    />
+
+    <span> End Date </span>
+    <input
+    type="date"
+    id="statisticEndDate"
+    formControlName="statisticEndDate"
+    />
+    <input
+    type="time"
+    id="statisticEndTime"
+    formControlName="statisticEndTime"
+    />
+    <!--span> UTC+3 </span>
+    <input 
+    type="checkbox"  
+    formControlName="ststisticUTC"
+    /-->
+    <span> Press to perform new dates search  </span>
+    <button (click)="showStatistic()">Show</button>
+  </form>
+</div>
+<div *ngIf="statistic" class="row">
+  <div class="col">
+    <div class="row">
+      <div class="col-6"  style="font-size: 20px;">
+        <action-type [actionType]="'LID'"></action-type>
+        Lead
+      </div>
+      <div class="col-6">
+        <p style="font-size: 20px;" class="mt-1">
+          {{stat_record.lid.lid_table.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col-6" style="font-size: 20px;">
+        <action-type [actionType]="'Task'"></action-type>
+       Task
+      </div>
+      <div class="col-6">
+        <p style="font-size: 20px;" class="mt-1">
+          {{stat_record.tas.tas_table.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col-6" style="font-size: 20px;">
+        <action-type [actionType]="'Appointment'"></action-type>
+        Meetings
+      </div>
+      <div class="col-6">
+        <p style="font-size: 20px;" class="mt-1">
+          {{stat_record.app.app_table.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col-6" style="font-size: 20px;">
+        <action-type [actionType]="'Proposal'"></action-type>
+        Contract
+      </div>
+      <div class="col-6">
+        <p style="font-size: 20px;" class="mt-1">
+          {{stat_record.con.con_table.length}} {{contract_amount}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col-6" style="font-size: 20px;">
+        <action-type [actionType]="'NotRelevant'"></action-type>
+        NotRelevant
+      </div>
+      <div class="col-6">
+        <p style="font-size: 20px;" class="mt-1">
+          {{stat_record.not.not_table.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="statistic" class="row">
+  <div class="col">
+
+    <div class="card stat_lead">
+      <div class="card-body">
+        <h6>Total Leads</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+              <!--th scope="col">Summ</th-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr 
+            *ngFor="let stat of stat_record.lid.lid_total; index as i" 
+            class="clickable" 
+            (click)="showPersons('lid','sourse',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+              <!--td> 
+                <div [ngSwitch]="stat.data">
+                  <div *ngSwitchCase="'PPC'">
+                    {{ ppc_mark }} 
+                  </div>
+                  <div *ngSwitchCase="'SNL'">
+                    {{ snl_mark }}
+                  </div>
+                  <div *ngSwitchDefault>
+                  </div>
+                </div>
+              </td-->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card stat_lead">
+      <div class="card-body">
+        <h6>PPC</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Sourse</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.lid.lid_ppc; index as i">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card stat_lead">
+      <div class="card-body">
+        <h6>Facebook</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.lid.lid_snl; index as i">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card stat_lead">
+      <div class="card-body">
+        <h6>SEO</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.lid.lid_seo; index as i">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+    <div class="card stat_tas">
+      <div class="card-body">
+        <h6>Users</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.tas.tas_user; index as i" 
+            class="clickable" 
+            (click)="showPersons('tas','user',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+
+    <div class="card stat_app">
+      <div class="card-body">
+        <h6>Meeting Status</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.app.app_status; index as i"  
+            class="clickable" 
+            (click)="showPersons('app','status',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card stat_app">
+      <div class="card-body">
+        <h6>Users</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.app.app_user; index as i"
+            class="clickable" 
+            (click)="showPersons('app','user',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card stat_app">
+      <div class="card-body">
+        <h6>Source</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.app.app_source; index as i"  
+            class="clickable" 
+            (click)="showPersons('app','sourse',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+    <div class="card stat_con">
+      <div class="card-body">
+        <h6>Users</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">User</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.con.con_user; index as i" 
+            class="clickable" 
+            (click)="showPersons('con','user',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card stat_con">
+      <div class="card-body">
+        <h6>Source</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.con.con_source; index as i"
+            class="clickable" 
+            (click)="showPersons('con','sourse',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card stat_not">
+      <div class="card-body">
+        <h6>Source</h6>
+        <table> 
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Source</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stat of stat_record.not.not_source; index as i"
+             
+            class="clickable" 
+            (click)="showPersons('not','sourse',stat)">
+              <td>{{i + 1}}</td>
+              <td>{{ stat.data }}</td>
+              <td>{{ stat.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<jw-modal id="custom-modal-101">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-101');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <table class="table table-hover">
+    <tbody>
+      <tr *ngFor="let person of stat_table" class="clickable" (click)="editIndividual(person)">
+        <td>{{person.first_name}}</td>
+        <td>{{person.last_name}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.phone_1}}</td>
+      </tr>
+    </tbody>
+  </table>
+</jw-modal>
+

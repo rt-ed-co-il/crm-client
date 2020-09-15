@@ -1,0 +1,124 @@
+<mdb-card>
+<mdb-card-body>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+  <div class="row">
+
+    <div class="col-md-4">
+      <h5 class="title">New User</h5>
+
+      <div [ngSwitch]="img_file">
+        <div *ngSwitchCase="0">
+          <img src="{{ImgPath}}person.png"/>
+        </div>
+        <div *ngSwitchCase="1">
+          <img src="{{ImgPath}}{{user.photo}}"/>
+        </div>
+        <div *ngSwitchCase="2">
+          <img [src]="previewUrl"/>
+        </div>
+      </div>
+   </div>
+
+    <div class="col-md-4">
+      <div class="pt-2">
+        <label>First Name</label>
+        <input id="first_name" type="text" formControlName="first_name" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" placeholder="First Name">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+          <div *ngIf="f.first_name.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="pt-2">
+        <label>Last Name</label>
+        <input id="last_name" type="text" formControlName="last_name" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" placeholder="Last Name">
+        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+          <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+        </div>
+      </div>
+      <div class="pt-2">
+        <label>Email</label>
+        <input id="email" type="text" formControlName="email" class="form-control form-control-sm"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email"/>
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="pt-2">
+        <label>Phone</label>
+        <input id="phone" type="text" formControlName="phone" class="form-control form-control-sm" placeholder="phone">
+      </div>
+      <div class="pt-2">
+        <label>Address</label>
+        <input id="address" type="text" formControlName="address" class="form-control form-control-sm" placeholder="Home Address">
+      </div>
+      <div class="pt-2">
+        <label >Add Photo</label>
+        <input mdbFileSelect type="file" id="photo" class="form-control form-control-sm" (change)="fileProgress($event)" />
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="pt-2">
+        <label>Branch</label>
+        <select class="form-control"
+        formControlName=branch 
+        (change)="ChangingValue($event)">
+          <option *ngFor="let branch of branches">
+            {{branch}}
+          </option>
+        </select>
+      </div>
+      <div class="pt-2">
+        <label>Category</label>
+        <select class="form-control"
+        formControlName=category 
+        (change)="ChangingValue($event)">
+          <option *ngFor="let category of categoryes">
+            {{category}}
+          </option>
+        </select>
+      </div>
+      <div class="pt-2">
+        <label>Role</label>
+        <select class="form-control"
+        formControlName=role 
+        (change)="ChangingValue($event)">
+          <option *ngFor="let role of roles">
+            {{role}}
+          </option>
+        </select>
+      </div>
+      <div class="pt-2">
+        <label>Rtuser</label>
+        <input id="rtuser" type="text" formControlName="rtuser" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.rtuser.errors }" />
+        <div *ngIf="submitted && f.rtuser.errors" class="invalid-feedback">
+          <div *ngIf="f.rtuser.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="pt-4">
+        <label>Password</label>
+        <input id="password" type="password" formControlName="password" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"/>
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+      </div>
+      <div class="pt-2">
+        <label>Password check</label>
+        <input id="passwordcheck" type="password" formControlName="passwordcheck" class="form-control form-control-sm"  [ngClass]="{ 'is-invalid': submitted && f.passwordcheck.errors }" placeholder="Password check"/>
+        <div *ngIf="submitted && f.passwordcheck.errors" class="invalid-feedback">
+          <div *ngIf="f.passwordcheck.errors.required">Confirm Password is required</div>
+          <div *ngIf="f.passwordcheck.errors.mustMatch">Passwords must match</div>
+        </div>
+      </div>
+      <div class="pt-2">
+        <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Save</button>
+        <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Exit</button>
+        <div *ngIf="UserError">{{UserError}} {{UserErrorText}}</div>
+      </div>
+    </div>
+  </div>
+</form>
+</mdb-card-body>
+</mdb-card>

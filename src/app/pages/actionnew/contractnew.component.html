@@ -1,0 +1,77 @@
+<mdb-card>
+  <mdb-card-body>
+    <form #f="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-4">
+          <action-type [ngStyle]="{'font-weight' : '900', 'font-size': '34px'}" [actionType]="'Proposal'"></action-type>
+          <p>Name {{person.first_name}} {{person.last_name}}</p>
+          <p>Id   {{person.country_id}}</p>
+          <p>Address {{person.address}}</p>
+          <p>Phone {{person.phone_1}}</p>
+          <p>Email {{person.email}}</p>
+          <p>Date {{create_date | date: 'dd/MM/yyyy'}}</p>
+          <p>User {{action_user}}</p>
+          <p>Path {{contract_product}}</p>
+          <div class="form-group">
+            <label>Contact start date:</label>
+            <input [name]="'start_date'" type="date" [(ngModel)]="start_date" mdbInput/>  
+          </div>
+          <div class="form-group">
+            <label>Total contact:</label>
+            <input [name]="'amount'" type="number" [(ngModel)]="amount"/>  
+          </div>
+          <p>You have to render and confirm contract first</p>
+          <button class="btn btn-outline-info btn-sm waves-effect"    (click)="renderContract(f)">Render and Confirm Contract</button>
+          <button class="btn btn-outline-success btn-sm waves-effect" (click)="saveAction(f)">Create Student</button>
+          <button class="btn btn-outline-danger btn-sm waves-effect"  (click)="cancel()">Cancel</button>
+        </div>
+        <div class="col-md-4">
+          <h4> {{contract_courses[0].product_group_description}}</h4>
+          <table>
+            <tr *ngFor="let course of contract_courses; let i=index">
+              <td>
+                <input [name]="'c'+course.product_id" type="checkbox" [(ngModel)]="''+course.hours" >
+              </td>
+              <td>
+                {{course.description}}
+              </td>
+              <td>
+                <input [name]="'p'+course.product_id" type="number" size="8" [(ngModel)]="course.price">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <h4> {{single_courses[0].product_group_description}}</h4>
+          <table>
+            <tr *ngFor="let course of single_courses; let i=index">
+              <td>
+                <input [name]="'d'+course.product_id" type="checkbox" ngModel>
+              </td>
+              <td>
+                {{course.description}}
+              </td>
+              <td>
+                <input [name]="'v'+course.product_id" type="number" size="8" [(ngModel)]="course.price">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+
+
+<jw-modal id="custom-modal-7">
+  <button type="button" 
+  class="close" 
+  data-dismiss="modal" 
+  aria-label="Close" 
+  (click)="closeModal('custom-modal-7');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4>Click below to download Contract</h4>
+  <a [href]="urlSafe">{{urlSafe}}</a>
+</jw-modal>
+      

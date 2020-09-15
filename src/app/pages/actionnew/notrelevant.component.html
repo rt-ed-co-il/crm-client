@@ -1,0 +1,37 @@
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="individualForm" (ngSubmit)="onSubmit(individualForm.value)">
+      <div class="row">
+        <div class="col-md-4">
+          <label>Person Name</label>
+          <input id="name" type="text" formControlName="name" class="form-control form-control-sm" disabled>
+          <label>Phone</label>
+          <input id="phone_1" type="text" formControlName="phone_1" class="form-control form-control-sm" disabled>
+          <label>Email</label>
+          <input id="email" type="text" formControlName="email" class="form-control form-control-sm" disabled>
+          <label>Source</label>
+          <input id="source" type="text" formControlName="source" class="form-control form-control-sm" disabled>
+        </div>
+        <div class="col-md-4">
+          <label>message</label>
+          <textarea id="message" dir="rtl" formControlName="message" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+          <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+            <div *ngIf="f.message.errors.required">source details is required</div>
+          </div>
+          <label>user id {{action_user}}</label>
+          <input id="user_id" type="text" formControlName="user_id" class="form-control form-control-sm" disabled>
+          <label>create user {{action_user}}</label>
+          <input id="create_user_id" type="text" formControlName="create_user_id" class="form-control form-control-sm dis" disabled>
+          <label>create date</label>
+          <input id="create_date" type="text" formControlName="create_date" class="form-control form-control-sm" disabled>
+        </div>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Create</button>
+          <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+
+      

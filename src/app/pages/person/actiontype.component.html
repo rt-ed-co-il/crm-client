@@ -1,0 +1,62 @@
+<div [ngSwitch]="actionType">
+    <div *ngSwitchCase="'LID'">
+      <a class="nav-link" [ngStyle]="{'color': 'AQUA'}">
+        <i class="nc-icon nc-diamond"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Appointment'">
+      <a class="nav-link" [ngStyle]="{'color': 'PURPLE'}">
+        <i class="nc-icon nc-calendar-60"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Email'">
+      <a class="nav-link" [ngStyle]="{'color': 'blue'}">
+        <i class="nc-icon nc-email-85"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'SMS'">
+      <a class="nav-link" [ngStyle]="{'color': 'BLUE'}">
+        <i class="nc-icon nc-chat-33"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Comment'">
+      <a class="nav-link" [ngStyle]="{'color': 'NAVY'}" >
+        <i class="nc-icon nc-alert-circle-i"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Task'">
+      <a class="nav-link" [ngStyle]="{'color': 'FUCHSIA'}">
+        <i class="nc-icon nc-bookmark-2"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Phone'">
+      <a class="nav-link" [ngStyle]="{'color': 'blue'}">
+        <i class="nc-icon nc-mobile"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'NotRelevant'">
+      <a class="nav-link" [ngStyle]="{'color': 'RED'}">
+        <i class="nc-icon nc-simple-remove"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'HR'">
+      <a class="nav-link" [ngStyle]="{'color': 'TEAL'}">
+        <i class="nc-icon nc-badge"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'Proposal'">
+      <a class="nav-link" [ngStyle]="{'color': 'TEAL'}">
+        <i class="nc-icon nc-single-copy-04"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'new'">
+      <a class="nav-link" [ngStyle]="{'color': '#FFC300'}">
+        <i class="nc-icon nc-simple-add"></i>
+      </a>
+    </div>
+    <div *ngSwitchDefault>
+      <a class="nav-link" [ngStyle]="{'color': 'TEAL'}" >
+        <i class="nc-icon nc-simple-delete"></i>
+      </a>
+    </div>
+</div>

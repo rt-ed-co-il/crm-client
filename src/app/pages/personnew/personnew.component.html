@@ -1,0 +1,104 @@
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="individualForm" >
+      <div class="row">
+        <div class="col-md-4">
+          <div *ngIf="!branch" [ngStyle]="{ 'text-align':'right' }">
+            <find-cmp></find-cmp>
+          </div>
+          <label>First Name</label>
+          <input id="first_name" type="text" formControlName="first_name" class="form-control form-control-sm" placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"/>
+          <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+            <div *ngIf="f.first_name.errors.required">first name is required</div>
+          </div> 
+          <label>Last Name</label>
+          <input id="last_name" type="text" formControlName="last_name" class="form-control form-control-sm" placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"/>
+          <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+            <div *ngIf="f.last_name.errors.required">last name is required</div>
+          </div>           
+          <label>Teudat Zehut</label>
+          <input id="country_id" type="text" formControlName="country_id" class="form-control form-control-sm" placeholder="country_id">
+          <label>Phone 1</label>
+          <input id="phone_1" type="text" formControlName="phone_1" class="form-control form-control-sm" placeholder="phone_1" [ngClass]="{ 'is-invalid': submitted && f.phone_1.errors }">
+          <div *ngIf="submitted && f.phone_1.errors" class="invalid-feedback">
+            <div *ngIf="f.phone_1.errors.required">Phone 1 is required</div>
+          </div>          
+          <label>Phone 2</label>
+          <input id="phone_2" type="text" formControlName="phone_2" class="form-control form-control-sm" placeholder="phone_2">
+          <label>Email</label>
+          <input id="email" type="text" formControlName="email" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+          <button class="btn btn-outline-success btn-sm waves-effect" (click)="onSubmit(individualForm.value)">Save</button>
+          <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Cancel</button>
+        </div>
+        <div class="col-md-4">
+          <label>Address</label>
+          <input id="address" type="text" formControlName="address" class="form-control form-control-sm" placeholder="Home Address">
+          <div class="row">
+            <div class = "col-4">
+              <label for="0">Call</label>
+              <input id="0" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="0" required>
+              <label for="1">No Call</label>
+              <input id="1" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="1" required>    
+            </div>
+            <div class = "col-8">
+              <div *ngIf="nc == 1" class="card mt-2">
+                <div class="card-body" [ngStyle]="{'font-weight' : '900', 'color': '#C70039'}">
+                  NO MORE CALL
+                </div>
+              </div> 
+            </div>
+          </div> 
+          <label>Date of Registration</label>
+          <input id="entry_timestamp" type="text" formControlName="entry_timestamp" class="form-control form-control-sm" disabled/>
+          <label>Source</label>
+          <input id="source" type="text" formControlName="source" class="form-control form-control-sm" disabled>
+          <label>Source details</label>
+          <input id="source_details" type="text" formControlName="source_details" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.source_details.errors }"/>
+          <div *ngIf="submitted && f.source_details.errors" class="invalid-feedback">
+            <div *ngIf="f.source_details.errors.required">source details is required</div>
+          </div>          
+    </div>
+        <div class="col-md-4">
+          <label>product</label>
+          <select class="form-control"
+          formControlName=product_group_id 
+          [ngClass]="{ 'is-invalid': submitted && f.product_group_id.errors }"
+          (change)="ChangingProductGroup($event)">
+            <option *ngFor="let product_group of product_groups" [value]="product_group.product_group_id">
+              {{product_group.description}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.product_group_id.errors" class="invalid-feedback">
+            <div *ngIf="f.product_group_id.errors.required">product is required</div>
+          </div>
+          <div *ngIf="singleCourse">
+            <select class="form-control"
+            formControlName=product_id 
+            [ngClass]="{ 'is-invalid': submitted && f.product_id.errors }"
+            (change)="ChangingValue($event)">
+            <option>Choose Product</option>
+              <option *ngFor="let product of products" [value]="product.product_id">
+                {{product.description}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.product_id.errors" class="invalid-feedback">
+              <div *ngIf="f.product_id.errors.required">product is required</div>
+            </div>
+          </div>
+          <label>branch</label>
+          <select class="form-control"
+          formControlName=branch_id 
+          (change)="ChangingValue($event)">
+            <option *ngFor="let branch of branches" [value]="branch.branch_id">
+              {{branch.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>

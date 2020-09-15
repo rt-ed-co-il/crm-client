@@ -1,0 +1,22 @@
+<div [ngSwitch]="actionStatus">
+    <div *ngSwitchCase="'new'">
+      <a class="nav-link" [ngStyle]="{'color': '#FFC300'}">
+        <i [ngStyle]="{'font-weight' : '900'}" class="nc-icon nc-simple-add"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'completed'">
+      <a class="nav-link" [ngStyle]="{'color': 'GREEN'}">
+        <i [ngStyle]="{'font-weight' : '900'}" class="nc-icon nc-check-2"></i>
+      </a>
+    </div>
+    <div *ngSwitchCase="'canceled'">
+      <a class="nav-link" [ngStyle]="{'color': '#C70039'}">
+        <i [ngStyle]="{'font-weight' : '900'}" class="nc-icon nc-simple-remove"></i>
+      </a>
+    </div>
+    <div *ngSwitchDefault>
+      <a class="nav-link" [ngStyle]="{'color': 'TEAL'}" >
+        <i [ngStyle]="{'font-weight' : '900'}" class="nc-icon nc-simple-delete"></i>
+      </a>
+    </div>
+  </div>

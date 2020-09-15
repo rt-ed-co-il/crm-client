@@ -1,0 +1,66 @@
+<mdb-card>
+  <mdb-card-body>
+    <div class="row">
+      <div class="col-md-10">
+        <h5 class="card-title">Users</h5>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-outline-primary btn-sm waves-effect" (click)="newUser()">New User</button>  
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table datatable class="row-border hover"> 
+        <thead class="text-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Results</th>
+            <th scope="col">Name</th>
+            <th scope="col">SName</th>
+            <th scope="col">phone</th>
+            <th scope="col">email</th>
+            <th scope="col">address</th>
+            <th scope="col">update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usr of usersData; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <div *ngIf="usr.photo; else elseBlock">
+                <img class="img-profile rounded-circle" src="{{imgPath}}{{usr.photo}}" height="40" width="40">
+              </div>
+              <ng-template #elseBlock> 
+                <img class="img-profile rounded-circle" src="{{imgPath}}person.png" width="40"/>
+              </ng-template>
+            </td>
+            <td>
+              <a class="nav-link" 
+              (click)="showResults(usr)"
+              [ngStyle]="{'cursor':'pointer'}"
+              >
+                <i class="nc-icon nc-circle-10"></i>
+              </a>
+            </td>
+            <td>{{ usr.first_name }}</td>
+            <td>{{ usr.last_name }}</td>
+            <td>{{ usr.phone }}</td>
+            <td>{{ usr.email }}</td>
+            <td>{{ usr.address }}</td>
+            <td>
+              <a class="nav-link" 
+              (click)="editUser(usr)"
+              [ngStyle]="{'cursor':'pointer'}"
+              >
+                <i class="nc-icon nc-circle-10"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mdb-card-body>
+</mdb-card>
+
+
+

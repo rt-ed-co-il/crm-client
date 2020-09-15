@@ -1,0 +1,27 @@
+<form [formGroup]="findForm" (ngSubmit)="onSubmit(findForm.value)">
+  <label>If not exist in table find here
+    <button type="submit">find</button>
+    <input id="in_value" type="text" formControlName="in_value" >
+  </label>
+</form>
+
+<jw-modal id="custom-modal-1">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-1');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div *ngIf="persons_data; else elseBlock">
+    <table class="table table-hover">
+      <tbody>
+        <tr *ngFor="let person of persons_data" [ngStyle]="{ 'cursor':'pointer'}" (click)="editIndividual(person)">
+          <td>{{person.first_name}}</td>
+          <td>{{person.last_name}}</td>
+          <td>{{person.email}}</td>
+          <td>{{person.phone_1}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<ng-template #elseBlock>Person not found</ng-template>
+
+</jw-modal>
+

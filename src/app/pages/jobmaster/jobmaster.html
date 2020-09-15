@@ -1,0 +1,85 @@
+<div *ngIf="statistic" class="row">
+  <div class="col-3">
+    <h6>other period</h6>
+    <form [formGroup]="personForm" >
+      <label>End Date</label>
+      <input
+      type="date"
+      id="statistic_date"
+      formControlName="statisticEndDate"
+      class="form-control form-control-sm"
+      mdbInput
+      />
+      <label>Start Date</label>
+      <input
+      type="date"
+      id="statistic_date"
+      formControlName="statisticStartDate"
+      class="form-control form-control-sm"
+      mdbInput
+      />
+      <button class="btn btn-sm" (click)="showStatistic()">Show</button>
+    </form>
+  </div>
+</div>
+
+
+
+<mdb-card>
+  <mdb-card-body>
+    <table *ngIf="statistic" class="table table-hover table-responsive table-sm" datatable >
+      <thead>
+        <tr>
+        <th>נייד</th>
+        <th>שולם</th>
+        <th>מסלול</th>
+        <th>ת.דיווח אחרון</th>
+        <th>סוג דיווח</th>
+        <th style="text-align:right" dir="rtl">דיווח</th>
+        <th>מקור ליד</th>
+        <th>ת. יצירה</th>
+        <th>סטטוס כללי</th>
+        <th style="text-align:right" dir="rtl">שם הסטודנט</th>
+        <th>כפול</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let act of leadsReport" (click)="editIndividual(act)" [ngStyle]="{ 'cursor':'pointer'}">
+          <td>
+            {{act.phone}}
+          </td>
+          <td>
+            {{act.amount}}
+          </td>
+          <td>
+            {{act.path}}
+          </td>
+          <td>
+            {{act.status_date | date: 'dd/MM/yyyy'}}
+          </td>
+          <td>
+            {{act.type}}
+          </td>
+          <td style="text-align:right" dir="rtl">
+            {{act.message}}
+          </td>
+          <td>
+            {{act.source}}
+          </td>
+          <td>
+            {{act.create_date | date: 'dd/MM/yyyy'}}
+          </td>
+          <td>
+            {{act.status}}
+          </td>
+          <td style="text-align:right" dir="rtl">
+            {{act.name}}
+          </td>
+          <td>
+            {{act.actions}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mdb-card-body>
+</mdb-card>

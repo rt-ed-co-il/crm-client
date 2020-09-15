@@ -1,0 +1,171 @@
+<mdb-card>
+  <mdb-card-body>
+    <div class="row">
+      <div class="col-md-8">
+        <form [formGroup]="personForm" (ngSubmit)="onSubmit(personForm.value)">
+          <div class="row">
+          <div class="col-md-6">
+            <label>First Name</label>
+            <input id="first_name" type="text" formControlName="first_name" class="form-control form-control-sm" placeholder="First Name">
+            <label>Last Name</label>
+            <input id="last_name" type="text" formControlName="last_name" class="form-control form-control-sm" placeholder="Last Name">
+            <label>Teudat Zehut</label>
+            <input id="country_id" type="text" formControlName="country_id" class="form-control form-control-sm" placeholder="country_id">
+            <label>Phone 1</label>
+            <input id="phone_1" type="text" formControlName="phone_1" class="form-control form-control-sm" placeholder="phone_1">
+            <label>Phone 2</label>
+            <input id="phone_2" type="text" formControlName="phone_2" class="form-control form-control-sm" placeholder="phone_2">
+            <label>Email</label>
+            <input id="email" type="text" formControlName="email" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+            <label>branch</label>
+            <select class="form-control"
+            formControlName=branch_id 
+            [ngClass]="{ 'is-invalid': submitted && f.branch_id.errors }"
+            (change)="ChangingValue($event)">
+              <option *ngFor="let branch of branches" [value]="branch.branch_id">
+                {{branch.name}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.branch_id.errors" class="invalid-feedback">
+              <div *ngIf="f.branch_id.errors.required">branch is required</div>
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Update</button>
+            <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Exit</button>
+          </div>
+          <div class="col-md-6">
+            <label>Address</label>
+            <input id="address" type="text" formControlName="address" class="form-control form-control-sm" placeholder="Home Address">
+            <div class="row">
+              <div class = "col-4">
+                <label for="0">Call</label>
+                <input id="0" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="0" required>
+                <label for="1">No Call</label>
+                <input id="1" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="1" required>    
+              </div>
+              <div class = "col-8">
+                <div *ngIf="nc == 1" class="card mt-2">
+                  <div class="card-body" [ngStyle]="{'font-weight' : '900', 'color': '#C70039'}">
+                    NO MORE CALL
+                  </div>
+                </div> 
+              </div>
+            </div> 
+            <label>Date of Registration</label>
+            <input id="entry_timestamp" type="text" formControlName="entry_timestamp" class="form-control form-control-sm" disabled/>
+            <label>Source</label>
+            <input id="source" type="text" formControlName="source" class="form-control form-control-sm" disabled>
+            <label>Source details</label>
+            <input id="source_details" type="text" formControlName="source_details" class="form-control form-control-sm">
+            <label>product</label>
+            <select class="form-control"
+            formControlName=product_group_id 
+            [ngClass]="{ 'is-invalid': submitted && f.product_group_id.errors }"
+            (change)="ChangingProductGroup($event)">
+              <option *ngFor="let product_group of product_groups" [value]="product_group.product_group_id">
+                {{product_group.description}}
+              </option>
+            </select>
+            <div *ngIf="submitted && f.product_group_id.errors" class="invalid-feedback">
+              <div *ngIf="f.product_group_id.errors.required">product is required</div>
+            </div>
+            <div *ngIf="singleCourse">
+              <select class="form-control"
+              formControlName=product_id 
+              [ngClass]="{ 'is-invalid': submitted && f.product_id.errors }"
+              (change)="ChangingValue($event)">
+              <option>Choose Product</option>
+                <option *ngFor="let product of products" [value]="product.product_id">
+                  {{product.description}}
+                </option>
+              </select>
+              <div *ngIf="submitted && f.product_id.errors" class="invalid-feedback">
+                <div *ngIf="f.product_id.errors.required">product is required</div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div *ngIf="ifCV" class="mb-2" (click)="openModal('custom-modal-1')">
+          <label>Person CV please click on view</label>
+          <textarea 
+            [(ngModel)] = "cv"
+            dir="rtl" 
+            [ngStyle]="{'cursor':'pointer'}"
+            class="text-right" 
+            placeholder="CV" 
+            cols="39" rows="7" 
+            disabled>
+          </textarea> 
+        </div>
+        <div *ngIf="ifTest" class="mb-2" (click)="openModal('custom-modal-2')">
+          <label>Person Tests results please click on view</label>
+          <textarea 
+            [(ngModel)] = "test"
+            [ngStyle]="{'cursor':'pointer'}" 
+            placeholder="testText" 
+            cols="39" 
+            rows="7" 
+            disabled>
+          </textarea> 
+        </div>
+        <file-cmp></file-cmp>
+        <!--iframe src='https://view.officeapps.live.com/op/embed.aspx?src=["https://file-examples.com/wp-content/uploads/2017/02/file-sample_100kB.docx"]' width='px' height='px' frameborder='0'>
+        </iframe>
+        <iframe src="https://docs.google.com/gview?url=https://file-examples.com/wp-content/uploads/2017/02/file-sample_100kB.docx&embedded=true">
+        </iframe-->
+      </div>
+    </div>
+  </mdb-card-body>
+</mdb-card>
+<div class="row">
+  <div class="col-md-10">
+    <actions-cmp></actions-cmp>
+  </div>
+  <div class="col-md-2">
+    <action-create-cmp></action-create-cmp>
+  </div>
+</div>
+
+<jw-modal id="custom-modal-1">
+  <button type="button" 
+  class="close" 
+  data-dismiss="modal" 
+  aria-label="Close" 
+  (click)="closeModal('custom-modal-1');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4>Person's CV</h4>
+  <textarea 
+  [(ngModel)] = "cv"
+    dir="rtl" 
+    [ngStyle]="{'cursor':'pointer'}"
+    class="text-right" 
+    placeholder="CV" 
+    cols="95" rows="15" 
+    disabled>
+  </textarea> 
+</jw-modal>
+
+<jw-modal id="custom-modal-2">
+  <button 
+  type="button" 
+  class="close" 
+  data-dismiss="modal" 
+  aria-label="Close" 
+  (click)="closeModal('custom-modal-2');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4>Examination Results</h4>
+  <textarea 
+  cols="95" 
+  rows="15" 
+  [(ngModel)] = "test"
+  disabled>
+</textarea> 
+</jw-modal>

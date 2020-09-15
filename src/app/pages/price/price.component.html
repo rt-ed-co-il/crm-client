@@ -1,0 +1,73 @@
+<mdb-card>
+  <mdb-card-body>
+    <h6>Price List</h6>
+    <form [formGroup]="personForm" >
+  <label>Choose Path</label>
+  <select class="form-control"
+  formControlName=product_group_id 
+  (change)="ChangingProductGroup($event)">
+    <option *ngFor="let product_group of product_groups" [value]="product_group.product_group_id">
+      {{product_group.description}}
+    </option>
+  </select>
+  <div *ngIf="singleCourse">
+    <select class="form-control"
+    formControlName=product_id 
+    (change)="ChangingValue($event)">
+    <option>Choose Product</option>
+      <option *ngFor="let product of products" [value]="product.product_id">
+        {{product.description}}
+      </option>
+    </select>
+  </div>
+  <button class="btn btn-sm" (click)="showPrice()">Show Price</button>
+</form>
+</mdb-card-body>
+</mdb-card>
+  
+<jw-modal id="custom-modal-11">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-11');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <table *ngIf="singleCourse; else elseBlock">
+    <tr><td>Single Course:</td><td>{{product.description}}</td></tr> 
+    <tr><td>Hours:</td><td>{{product.hours}}</td></tr>
+    <tr><td>Price:</td><td style="font-weight: 600; color: darkgreen;">{{product.disc_price}}</td></tr>
+    <tr><td>Full Price:</td><td>{{product.price}}</td></tr>
+    <tr><td>S Price:</td><td>{{product.course_s_price}}</td></tr>
+    <tr><td>S Full Price:</td><td>{{product.course_s_full_price}}</td></tr>
+    <tr><td>Payment Check:</td><td>{{product.course_payment_check}}</td></tr>
+    <tr><td>Payment Credit:</td><td>{{product.course_payment_credit}}</td></tr>
+  </table>
+  <ng-template #elseBlock>
+    <table>
+      <tbody>
+        <tr><td>Path:</td><td>{{product_group.description}}</td></tr> 
+        <tr><td>Price:</td><td style="font-weight: 600; color: darkgreen;">{{product_group.price}}</td></tr>
+        <tr><td>Full Price:</td><td>{{product_group.full_price}}</td></tr>
+        <tr><td>S Price:</td><td>{{product_group.s_price}}</td></tr>
+        <tr><td>S Full Price:</td><td>{{product_group.s_full_price}}</td></tr>
+        <tr><td>Payment Check:</td><td>{{product_group.payments_check}}</td></tr>
+        <tr><td>Payment Credit:</td><td>{{product_group.payments_credit}}</td></tr>    
+      </tbody>
+    </table>
+    <p>Corses in path:</p>
+    <table>
+      <thead> 
+        <tr>
+          <th>Description</th>
+          <th>Course Hours</th>
+          <th>Full Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">      
+          <td>{{product.description}}</td>
+          <td>{{product.hours}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</jw-modal>
+

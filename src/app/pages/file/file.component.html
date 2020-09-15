@@ -1,0 +1,61 @@
+<mdb-card>
+<mdb-card-body>
+  <div class="row">
+    <div class="col-md-12">
+      <h6>Existing Files</h6>
+      <ul *ngIf="files[0]; else elseBlock">
+        <li *ngFor="let file of files" 
+            [ngStyle]="{'cursor':'pointer'}" 
+            (click)="showFile(file)"
+        >
+          {{file}}
+        </li>
+      </ul>
+      <ng-template #elseBlock>
+        <p>No files found</p>
+      </ng-template>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form #f="ngForm"  novalidate>
+        <label>Add File</label>
+        <input 
+        mdbFileSelect 
+        type="file" 
+        id="photo" 
+        class="form-control form-control-sm" 
+        (change)="fileProgress($event)" 
+        [(ngModel)] = "fileName" 
+        name = "fileName" 
+        />  
+        <button class="btn btn-outline-success btn-sm waves-effect"  (click)="writeFileBase64(directory)">Upload</button>
+      </form>
+    </div>
+  </div>
+</mdb-card-body>
+</mdb-card>
+
+<jw-modal id="custom-modal-3">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-3');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div [ngSwitch]="img_file">
+    <div *ngSwitchCase="0">
+      <img src="{{ImgPath}}person.png" />
+    </div>
+    <div *ngSwitchCase="1">
+      <pdf-viewer 
+        [src]="previewUrl" 
+        [render-text]="true"
+        style="display: block;"
+      ></pdf-viewer>
+    </div>
+    <div *ngSwitchCase="2">
+      <img [src]="previewUrl"/>
+    </div>
+    <div *ngSwitchCase="4">
+      <iframe width="100%" height="100%" frameBorder="0" [src]="urlSafe"></iframe>
+    </div>
+  </div>
+</jw-modal>

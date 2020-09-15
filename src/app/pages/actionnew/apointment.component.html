@@ -1,0 +1,104 @@
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="individualForm" (ngSubmit)="onSubmit(individualForm.value)">
+      <div class="row">
+        <div class="col-md-4">
+          <action-type [ngStyle]="{'font-weight' : '900', 'font-size': '34px'}" [actionType]="new_action_type"></action-type>
+          <label for="0">Call</label>
+          <input id="0" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="0" disabled>
+          <label for="1">No Call</label>
+          <input id="1" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="1" disabled>
+          <label>Person Name</label>
+          <input id="name" type="text" formControlName="name" class="form-control form-control-sm" disabled>
+          <label>Phone</label>
+          <input id="phone_1" type="text" formControlName="phone_1" class="form-control form-control-sm" disabled>
+          <label>Email</label>
+          <input id="email" type="text" formControlName="email" class="form-control form-control-sm" disabled>
+          <label>Source</label>
+          <input id="source" type="text" formControlName="source" class="form-control form-control-sm" disabled>
+        </div>
+        <div class="col-md-4">
+          <label>message</label>
+          <textarea id="message" dir="rtl" formControlName="message" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+          <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+            <div *ngIf="f.message.errors.required">source details is required</div>
+          </div>     
+          <label>status</label>
+          <select class="form-control"
+          formControlName=status 
+          (change)="ChangingValue($event)" [value]="'new'">
+            <option *ngFor="let status of statuses" >
+              {{status}}
+            </option>
+          </select>
+          <label>priority</label>
+          <input id="priority" type="text" formControlName="priority" class="form-control form-control-sm">
+          <label>location</label>
+          <select class="form-control"
+          formControlName=location 
+          [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+          (change)="ChangingValue($event)">
+            <option *ngFor="let branch of branches" [value]="branch.branch_id">
+              {{branch.name}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+            <div *ngIf="f.location.errors.required">location is required</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label>user id</label>
+          <select class="form-control"
+          formControlName=user_id 
+          [ngClass]="{ 'is-invalid': submitted && f.user_id.errors }"
+          (change)="ChangingValue($event)">
+            <option *ngFor="let user of users" [value]="user.rtuser">
+              {{user.first_name}} {{user.last_name}}
+            </option>
+          </select>
+          <label>create user {{action_user}}</label>
+          <input id="create_user_id" type="text" formControlName="create_user_id" class="form-control form-control-sm dis" disabled>
+          <label>update user</label>
+          <input id="update_user_id" type="text" formControlName="update_user_id" class="form-control form-control-sm" disabled>
+          <label>create date</label>
+          <input id="create_date" type="text" formControlName="create_date" class="form-control form-control-sm" disabled>
+          <label>start date</label>
+          <input
+          type="date"
+          id="start_date"
+          formControlName="start_date"
+          class="form-control form-control-sm"
+          mdbInput
+          [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }" 
+          />
+          <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
+            <div *ngIf="f.start_date.errors.required">start date is required</div>
+          </div>
+          <input
+          type="time"
+          id="start_time"
+          formControlName="start_time"
+          class="form-control form-control-sm"
+          mdbInput
+          [ngClass]="{ 'is-invalid': submitted && f.start_time.errors }" 
+          />
+          <div *ngIf="submitted && f.start_time.errors" class="invalid-feedback">
+            <div *ngIf="f.start_time.errors.required">start time is required</div>
+          </div>
+          <label>due date</label>
+          <input id="due_date" type="text" formControlName="due_date" class="form-control form-control-sm" disabled>
+          <label>update date</label>
+          <input id="update_date" type="text" formControlName="update_date" class="form-control form-control-sm" disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Create</button>
+          <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+
+      

@@ -1,0 +1,112 @@
+
+<div class="row">
+  <h4> Consultant results : {{consultant}}</h4>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <action-type [actionType]="'Appointment'"></action-type>
+        Meetings
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{meetingsEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <action-type [actionType]="'Task'"></action-type>
+        Tasks
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{tipulEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-6" style="font-size: 15px;">
+        <div class="mt-3">
+          <i [ngStyle]="{'color': 'blue'}" class="nc-icon nc-email-85"></i>
+          <i [ngStyle]="{'color': 'BLUE'}" class="nc-icon nc-chat-33"></i>
+          <i [ngStyle]="{'color': 'NAVY'}" class="nc-icon nc-alert-circle-i"></i>  
+        </div>
+        Comment,Email,SMS
+      </div>
+      <div class="col-6">
+        <p style="font-size: 25px;" class="mt-1">
+          {{infoEntries.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <div *ngFor="let enry of meetingsEntries" 
+    [ngStyle]="{ 
+      'cursor':'pointer',
+      'border-left-width': '4px',
+      'border-left-color': 'PURPLE',
+      'border-left-style':'solid',
+      'border-radius': '0'
+    }" 
+     class="card" (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_start_date" class="fa fa-circle"></i>
+          {{enry.last_action_start_date | date: 'dd/MM/yy'}}
+        </p>
+        {{enry.first_name}} {{enry.last_name}} {{enry.email}} {{enry.phone_1}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div *ngFor="let enry of tipulEntries" 
+    [ngStyle]="{ 
+      'cursor':'pointer',
+      'border-left-width': '4px',
+      'border-left-color': 'FUCHSIA',
+      'border-left-style':'solid',
+      'border-radius': '0'
+    }" class="card" (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_start_date" class="fa fa-circle"></i>
+          {{enry.last_action_start_date | date: 'dd/MM/yy'}}
+        </p>
+        {{enry.first_name}} {{enry.last_name}} {{enry.email}} {{enry.phone_1}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div *ngFor="let enry of infoEntries"  
+    [ngStyle]="{ 
+      'cursor':'pointer',
+      'border-left-width': '4px',
+      'border-left-color': 'NAVY',
+      'border-left-style':'solid',
+      'border-radius': '0'
+    }"  class="card" (click)="editIndividual(enry)">
+      <div class="card-body">
+        <p >
+          <i thisDayCheck [(day)] = "enry.last_action_create_date" class="fa fa-circle"></i>
+          {{enry.last_action_create_date | date: 'dd/MM/yy'}}
+        </p> 
+        {{enry.first_name}} {{enry.last_name}} {{enry.email}} {{enry.phone_1}}
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,21 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="#" class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/rt.jpg">
+      </div>
+    </a>
+    <a href="#" class="simple-text logo-normal">
+      crm
+    </a>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}" style="text-align: center;">
+            <a [routerLink]="[menuItem.path]">
+                <i style ="margin-left: 21px;" class="nc-icon {{menuItem.icon}}"></i><br>
+                <span>{{menuItem.title}}</span>
+            </a>
+        </li>
+    </ul>
+</div>

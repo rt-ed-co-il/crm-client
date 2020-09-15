@@ -1,0 +1,82 @@
+<mdb-card>
+  <mdb-card-body>
+    <form [formGroup]="individualForm" (ngSubmit)="onSubmit(individualForm.value)">
+      <div class="row">
+        <div class="col-md-4">
+          <action-type [ngStyle]="{'font-weight':'900','font-size':'34px'}" [actionType]="action.type"></action-type>
+          <label for="0">Call</label>
+          <input id="0" type="radio" class="form-control form-control-sm"  formControlName="no_call" [(ngModel)]="nc" [value]="0" disabled>
+          <label for="1">No Call</label>
+          <input id="1" type="radio" class="form-control form-control-sm mb-3"  formControlName="no_call" [(ngModel)]="nc" [value]="1" disabled>
+          <p>Person Name: {{person.first_name}} {{person.last_name}}</p>
+          <p>Phone: {{person.phone_1}}</p>
+          <p>Email: {{person.email}}</p>
+          <p>Source: {{lead.source}}</p>
+        </div>
+        <div class="col-md-4">
+          <label>message</label>
+          <textarea id="message" dir="rtl" formControlName="message" class="text-right" placeholder="message" cols="41" rows="5"></textarea> 
+          <label>status</label>
+          <select class="form-control"
+          formControlName=status 
+          (change)="ChangingValue($event)" [value]="action.status">
+            <option *ngFor="let status of statuses">
+              {{status}}
+            </option>
+          </select>
+          <label>priority</label>
+          <input id="priority" type="text" formControlName="priority" class="form-control form-control-sm">
+          <label>location</label>
+          <select class="form-control"
+          formControlName=location 
+          (change)="ChangingValue($event)" [value]="action.location">
+            <option *ngFor="let branch of branches" [value]="branch.branch_id">
+              {{branch.name}}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label>user id</label>
+          <select class="form-control"
+          formControlName=user_id 
+          (change)="ChangingValue($event)">
+            <option *ngFor="let user of users" [value]="user.rtuser">
+              {{user.first_name}} {{user.last_name}}
+            </option>
+          </select>          
+          <p class="mt-3">create user {{action.create_user_id}} {{action_user}} </p>
+          <p>create date  {{action.create_date | date: 'dd/MM/yyyy'}}</p>
+          <label>start date</label>
+          <input
+          type="date"
+          id="start_date"
+          formControlName="start_date"
+          class="form-control form-control-sm mb-3"
+          [(ngModel)] ="startDate"
+          mdbInput/>
+          <input
+          type="time"
+          id="start_time"
+          formControlName="start_time"
+          class="form-control form-control-sm"
+          mdbInput/>
+          <p class="mt-3">update date {{update_date | date: 'dd/MM/yyyy'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-outline-success btn-sm waves-effect">Update</button>
+          <button class="btn btn-outline-danger btn-sm waves-effect" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </mdb-card-body>
+</mdb-card>
+    
+
+
+
+
+
+
+      
