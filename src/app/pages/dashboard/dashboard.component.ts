@@ -107,14 +107,14 @@ export class DashboardComponent implements OnInit{
     } else if (type==='tas') {
       table = this.stat_record.tas.tas_table;
       if (filter==='user') {
-        this.stat_table = _.where(table, {create_user_id:stat.data });
+        this.stat_table = _.where(table, {create_user_id:+stat.data });
       }
     } else if (type==='app') {
       table = this.stat_record.app.app_table;
       if (filter==='sourse') {
         this.stat_table = _.where(table, {source:stat.data });
       } else if (filter==='user') {
-        this.stat_table = _.where(table, {user_id:stat.data });
+        this.stat_table = _.where(table, {user_id:+stat.data });
       } else if (filter==='status') {
         this.stat_table = _.where(table, {status:stat.data });
       }
@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit{
       if (filter==='sourse') {
         this.stat_table = _.where(table, {source:stat.data });
       } else if (filter==='user') {
-        this.stat_table = _.where(table, {create_user_id:stat.data });
+        this.stat_table = _.where(table, {create_user_id:+stat.data });
       }
     } else if (type==='not') {
       table = this.stat_record.not.not_table;
