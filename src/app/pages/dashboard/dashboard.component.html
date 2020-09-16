@@ -397,10 +397,12 @@
   <table class="table table-hover">
     <tbody>
       <tr *ngFor="let person of stat_table" class="clickable" (click)="editIndividual(person)">
-        <td>{{person.first_name}}</td>
-        <td>{{person.last_name}}</td>
-        <td>{{person.email}}</td>
-        <td>{{person.phone_1}}</td>
+        <td>{{person.first_name}} {{person.last_name}}</td>
+        <td>{{person.create_date | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <!--td>{{person.email}}</td>
+        <td>{{person.phone_1}}</td-->
+        <td>{{person.message}}</td>
+        
       </tr>
     </tbody>
   </table>
